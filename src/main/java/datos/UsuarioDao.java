@@ -15,7 +15,7 @@ public class UsuarioDao {
     
     private static String SQL_SELECT="SELECT * FROM usuarios";
 //    private static String SQL_UPDATE="";
-//    private static String SQL_INSERT="INSERT INTO usuarios usuario, password VALUES(usuario=?,password=?)";
+    private static String SQL_INSERT="INSERT INTO usuarios (usuario, password) VALUES(?,?)";
 //    private static String SQL_DELETE="";
     
     public  List<Usuario>seleccionar(){
@@ -62,6 +62,34 @@ public class UsuarioDao {
         
     }
     
+    public int insertar(Usuario usuario) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int registros=0;
+        
+        try {
+            conn=getConnection();
+            stmt=conn.prepareStatement(SQL_INSERT);
+            
+            //pasar valores a la consukta
+            stmt.setString(1, usuario.getUsuario());
+            stmt.setString(2, usuario.getPassword());
+            registros=stmt.executeUpdate(); //este metodo puede ejecutar sentencias tipo insert, update o delete
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }finally{
+            try {
+                close(stmt);
+                close(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace(System.out);
+            }
+            
+        
+    }
+        return registros;
+
+    }
     
     
 }
