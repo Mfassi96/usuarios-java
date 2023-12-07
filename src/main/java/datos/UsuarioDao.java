@@ -123,7 +123,7 @@ public class UsuarioDao {
 
     }
         
-        public int eliminar (Usuario ousuario) {
+        public int eliminar (int idUsuario) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
@@ -133,7 +133,7 @@ public class UsuarioDao {
             stmt = conn.prepareStatement(SQL_DELETE);
 
             //pasar valores a la consukta
-            stmt.setInt(1, ousuario.getIdUsuario());
+            stmt.setInt(1, idUsuario);
             registros = stmt.executeUpdate(); //este metodo puede ejecutar sentencias tipo insert, update o delete
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);

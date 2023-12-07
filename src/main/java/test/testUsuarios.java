@@ -32,8 +32,8 @@ public class testUsuarios {
 
     //Eliminar usuario
     
-    Usuario usuarioEliminar= new Usuario(28);
-    ousuarioDao.eliminar(usuarioEliminar);
+    
+    ousuarioDao.eliminar(22);
 
         imprimir(ousuarioDao);
 
