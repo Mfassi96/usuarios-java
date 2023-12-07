@@ -14,7 +14,7 @@ import java.util.List;
 public class UsuarioDao {
     
     private static String SQL_SELECT="SELECT * FROM usuarios";
-//    private static String SQL_UPDATE="";
+    private static String SQL_UPDATE="UPDATE usuarios SET usuario=?,password=? WHERE ID=?";
     private static String SQL_INSERT="INSERT INTO usuarios (usuario, password) VALUES(?,?)";
 //    private static String SQL_DELETE="";
     
@@ -87,6 +87,38 @@ public class UsuarioDao {
             
         
     }
+        return registros;
+
+    }
+    
+    // metodo update
+    
+        public int actualizar (Usuario ousuario) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int registros = 0;
+
+        try {
+            conn = getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE);
+
+            //pasar valores a la consukta
+            // cada numero hace referencia a la posicion del valor a setear en la consulta
+            stmt.setString(1, ousuario.getUsuario());
+            stmt.setString(2, ousuario.getPassword());
+             stmt.setInt(3, ousuario.getIdUsuario()); 
+            registros = stmt.executeUpdate(); //este metodo puede ejecutar sentencias tipo insert, update o delete
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            try {
+                close(stmt);
+                close(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace(System.out);
+            }
+
+        }
         return registros;
 
     }
