@@ -26,11 +26,20 @@ public class testUsuarios {
 //        
 
 // Actualizar usuario
-Usuario usuarioactualizar=new Usuario(28, "usuario123", "usuario-123");
-ousuarioDao.actualizar(usuarioactualizar);
+//Usuario usuarioactualizar=new Usuario(28, "usuario123", "usuario-123");
+//ousuarioDao.actualizar(usuarioactualizar);
 
+
+    //Eliminar usuario
+    
+    Usuario usuarioEliminar= new Usuario(28);
+    ousuarioDao.eliminar(usuarioEliminar);
 
         imprimir(ousuarioDao);
 
     }
+    
+    
+    
+    
 }
